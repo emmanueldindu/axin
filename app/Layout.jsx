@@ -1,10 +1,13 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import { useFonts } from 'expo-font';
 
 const Layout = () => {
+
+
     return (
-        <View style={styles.container}>
-          <Text>Open up App.js to start working on your app!</Text>
+        <View className=' mt-12'>
+          <Text className='text-black font-semibold'>Axin</Text>
           {/* <StatusBar style="auto" /> */}
         </View>
       );
