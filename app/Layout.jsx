@@ -5,6 +5,7 @@ import {
   View,
   Image,
   TouchableOpacity,
+  StatusBar,
 } from "react-native";
 import React from "react";
 import { useFonts } from "expo-font";
@@ -13,7 +14,7 @@ import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import images from "../constants/images";
 import CustomButton from "../components/CustomButton";
-import Button from "../components/Button";
+
 // import { ScrollView } from "react-native-gesture-handler";
 
 const Layout = () => {
@@ -47,15 +48,20 @@ const Layout = () => {
             Exploration with Aora
           </Text>
 
-          <TouchableOpacity className="bg-secondary mt-12 rounded-xl justify-center items-center">
+          <TouchableOpacity 
+          className="bg-secondary mt-12 rounded-xl min-h-[62px] w-full p-2 justify-center items-center"
+          activeOpacity={0.7}
+          onPress={() => navigation.navigate('Signin')}
+          >
             <Text className="text-primary font-semibold text-lg">
-              CustomButton
+              Continue With Email
             </Text>
           </TouchableOpacity>
           {/* <Button />
        <CustomButton /> */}
         </View>
       </ScrollView>
+      <StatusBar backgroundColor='#000' style='light' />
     </SafeAreaView>
   );
 };

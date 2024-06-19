@@ -6,13 +6,13 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Layout from "./app/Layout";
 import Home from "./app/(tabs)/Home";
 import ButtonTab from "./app/navigation/ButtonTab";
+import Signin from "./app/(Auth)/Signin";
 
 const Stack = createNativeStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-
         <Stack.Screen
           name="index"
           component={Layout}
@@ -20,8 +20,16 @@ export default function App() {
         ></Stack.Screen>
         <Stack.Screen name="ButtonTab" component={ButtonTab}></Stack.Screen>
 
+        <Stack.Screen 
+        name="Home" 
+        component={Home}></Stack.Screen>
+        <Stack.Screen
+         name='Signin' 
+         component={Signin}
+         options={{headerShown: false}}
+         >
 
-        <Stack.Screen name="Home" component={Home}></Stack.Screen>
+        </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );
