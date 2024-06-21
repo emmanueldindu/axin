@@ -7,6 +7,7 @@ import Layout from "./app/Layout";
 import Home from "./app/(tabs)/Home";
 import ButtonTab from "./app/navigation/ButtonTab";
 import Signin from "./app/(Auth)/Signin";
+import Signup from "./app/(Auth)/Signup";
 
 const Stack = createNativeStackNavigator();
 export default function App() {
@@ -22,12 +23,22 @@ export default function App() {
 
         <Stack.Screen 
         name="Home" 
-        component={Home}></Stack.Screen>
+        component={Home}>
+
+        </Stack.Screen>
         <Stack.Screen
          name='Signin' 
          component={Signin}
          options={{headerShown: false}}
          >
+
+
+        </Stack.Screen>
+        <Stack.Screen
+        name="Signup"
+        component={Signup}
+        options={{headerShown: false}}
+        >
 
         </Stack.Screen>
       </Stack.Navigator>
