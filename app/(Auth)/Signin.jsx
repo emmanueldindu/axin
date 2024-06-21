@@ -2,6 +2,7 @@ import { View, Text, ScrollView } from "react-native";
 import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import FormFied from "../../components/FormFied";
+import CustomButton from "../../components/CustomButton";
 
 const Signin = () => {
   const[form, setForm] = useState({
@@ -36,6 +37,10 @@ const Signin = () => {
           handleChangeText={(e) => setForm({ ...form, password: e })}
           otherStyles="mt-7"
  
+        />
+
+        <CustomButton 
+        title={'Sign In'}
         />
       </ScrollView>
     </SafeAreaView>
