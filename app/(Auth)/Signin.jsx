@@ -4,7 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import FormFied from "../../components/FormFied";
 
 const Signin = () => {
-  cont[(form, setForm)] = useState({
+  const[form, setForm] = useState({
     email: "",
     password: "",
   });
@@ -15,11 +15,11 @@ const Signin = () => {
         className="w-full   px-4 my-6  min-h-[85vh]"
       >
         <Text className="text-3xl  text-white font-semibold">
-          Ax<Text className="">Vid</Text>
+          Ax<Text className="text-[#FFB500]">Vid</Text>
         </Text>
 
         <Text className="text-white text-2xl font-semibold mt-10 ">
-          Log in to Ax<Text className="text-[#FFB500]">Vid</Text>
+          Log in to Ax<Text className="">Vid</Text>
         </Text>
 
         <FormFied
@@ -31,11 +31,11 @@ const Signin = () => {
         />
 
         <FormFied
-          title="Email"
-          value={form.email}
-          handleChangeText={(e) => setForm({ ...form, email: e })}
+          title="Password"
+          value={form.password}
+          handleChangeText={(e) => setForm({ ...form, password: e })}
           otherStyles="mt-7"
-          keyboardType="email-address"
+ 
         />
       </ScrollView>
     </SafeAreaView>
