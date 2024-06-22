@@ -9,6 +9,8 @@ import ButtonTab from "./app/navigation/ButtonTab";
 import Signin from "./app/(Auth)/Signin";
 import Signup from "./app/(Auth)/Signup";
 
+
+// com.odoi.axvid
 const Stack = createNativeStackNavigator();
 export default function App() {
   return (
