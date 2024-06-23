@@ -1,9 +1,11 @@
-import { View, Text, ScrollView, TouchableOpacity } from "react-native";
+import { View, Text, ScrollView, TouchableOpacity, Alert } from "react-native";
 import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import FormFied from "../../components/FormFied";
 import CustomButton from "../../components/CustomButton";
 import { useNavigation } from "@react-navigation/native";
+import { createUser } from "../../lib/appwrite";
+import { router } from "expo-router";
 
 const Signup = () => {
   const [form, setForm] = useState({
@@ -14,6 +16,26 @@ const Signup = () => {
 
   const [submitting, isSubmitting] = useState(false);
   const navigation = useNavigation();
+
+  const submit = async () => {
+    if(!form.username || !form.email || !form.password) {
+      Alert.alert('Error', 'Please fill out all the fields')
+    }
+
+    isSubmitting(true)
+    
+
+    try {
+      const result = await createUser(form.email, form.password, form.username)
+      navigation.navigate('ButtonTab')
+// router.replace('Home')
+    } catch (error) {
+      Alert.alert('Error', error.message)
+    } finally {
+      isSubmitting(false)
+    }
+
+  }  
   return (
     <SafeAreaView className="bg-primary h-full">
       <ScrollView
@@ -56,6 +78,7 @@ const Signup = () => {
         <CustomButton
           title={"Sign In"}
           continerStyles={"mt-7"}
+          handlePress={submit}
           // isLoading={isSubmitting}
         />
 
