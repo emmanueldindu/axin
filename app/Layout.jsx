@@ -7,18 +7,31 @@ import {
   TouchableOpacity,
   StatusBar,
 } from "react-native";
-import React from "react";
+import React, {useEffect} from "react";
 import { useFonts } from "expo-font";
 import { Link } from "expo-router";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import images from "../constants/images";
 import CustomButton from "../components/CustomButton";
+import { useGlobalContext } from "../context/GlobalProvider";
 
 // import { ScrollView } from "react-native-gesture-handler";
 
 const Layout = () => {
   const navigation = useNavigation();
+  const {isLoading, isLoggedIn} = useGlobalContext()
+
+ 
+  useEffect(() => {
+    console.log('isLoading:', isLoading);
+    console.log('isLoggedIn:', isLoggedIn);
+    if (!isLoading && isLoggedIn) {
+      console.log('Navigating to ButtonTab');
+      navigation.navigate('ButtonTab');
+    }
+  }, [isLoading, isLoggedIn, navigation]);
+
 
   return (
     <SafeAreaView className="bg-black h-full ">
