@@ -1,9 +1,11 @@
-import { View, Text, ScrollView, TouchableOpacity } from "react-native";
+import { View, Text, ScrollView, TouchableOpacity, Alert } from "react-native";
 import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import FormFied from "../../components/FormFied";
 import CustomButton from "../../components/CustomButton";
 import { useNavigation } from "@react-navigation/native";
+import { signIn, getCurrentUser } from "../../lib/appwrite";
+import { useGlobalContext } from "../../context/GlobalProvider";
 
 const Signin = () => {
   const [form, setForm] = useState({
@@ -13,6 +15,39 @@ const Signin = () => {
 
   const [submitting, isSubmitting] = useState(false);
   const navigation = useNavigation();
+  const { setIsLoading, setUser, setIsLoggedIn } = useGlobalContext();
+
+
+  const handleSignIn = async () => {
+    if (!form.email || !form.password) {
+      Alert.alert('Error', 'Please fill out all the fields');
+      return;
+    }
+
+    isSubmitting(true);
+    setIsLoading(true);
+
+    try {
+      await signIn(form.email, form.password);
+      const user = await getCurrentUser();
+      if (user) {
+        setUser(user);
+        setIsLoggedIn(true);
+        navigation.navigate('ButtonTab');
+      } else {
+        Alert.alert('Error', 'Failed to get user details');
+      }
+    } catch (error) {
+      Alert.alert('Error', error.message);
+    } finally {
+      isSubmitting(false);
+      setIsLoading(false);
+    }
+  };
+
+
+
+
   return (
     <SafeAreaView className="bg-primary h-full">
       <ScrollView
@@ -45,6 +80,7 @@ const Signin = () => {
         <CustomButton
           title={"Sign In"}
           continerStyles={"mt-7"}
+          handlePress={handleSignIn}
           // isLoading={isSubmitting}
         />
 

@@ -4,7 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import FormFied from "../../components/FormFied";
 import CustomButton from "../../components/CustomButton";
 import { useNavigation } from "@react-navigation/native";
-import { createUser } from "../../lib/appwrite";
+import { createUser, logout } from "../../lib/appwrite";
 import { router } from "expo-router";
 
 const Signup = () => {
@@ -28,7 +28,7 @@ const Signup = () => {
     try {
       const result = await createUser(form.email, form.password, form.username)
       navigation.navigate('ButtonTab')
-// router.replace('Home')
+
     } catch (error) {
       Alert.alert('Error', error.message)
     } finally {
@@ -36,6 +36,19 @@ const Signup = () => {
     }
 
   }  
+
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      Alert.alert('Success', 'You have been logged out');
+      navigation.navigate('Signin');
+    } catch (error) {
+      Alert.alert('Error', error.message);
+    }
+  };
+
+
   return (
     <SafeAreaView className="bg-primary h-full">
       <ScrollView
@@ -82,12 +95,26 @@ const Signup = () => {
           // isLoading={isSubmitting}
         />
 
+        {/* <CustomButton 
+        continerStyles={'mt-12'}
+        title={'logout'}
+        handlePress={handleLogout}
+        /> */}
+
         <View className="justify-center pt-5 flex-row gap-2">
           <Text className="text-lg text-gray-100">
            Have an account already?
             </Text>
             <TouchableOpacity onPress={() => navigation.navigate("Signin")}>
               <Text className="text-secondary text-lg ">Sign Up</Text>
+            </TouchableOpacity>
+   
+        </View>
+
+        <View className="justify-center pt-5 flex-row gap-2">
+       
+            <TouchableOpacity onPress={handleLogout}>
+              <Text className="text-gray-400 text-lg ">logout</Text>
             </TouchableOpacity>
    
         </View>

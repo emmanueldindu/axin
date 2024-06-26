@@ -8,12 +8,15 @@ import Home from "./app/(tabs)/Home";
 import ButtonTab from "./app/navigation/ButtonTab";
 import Signin from "./app/(Auth)/Signin";
 import Signup from "./app/(Auth)/Signup";
+import GlobalProvider from "./context/GlobalProvider";
 
 
 // com.odoi.axvid
 const Stack = createNativeStackNavigator();
 export default function App() {
   return (
+    <GlobalProvider>
+
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
@@ -21,7 +24,11 @@ export default function App() {
           component={Layout}
           options={{ headerShown: false }}
         ></Stack.Screen>
-        <Stack.Screen name="ButtonTab" component={ButtonTab}></Stack.Screen>
+        <Stack.Screen
+         name="ButtonTab" 
+         component={ButtonTab}
+         options={{headerShown: false}}
+         ></Stack.Screen>
 
         <Stack.Screen 
         name="Home" 
@@ -45,6 +52,7 @@ export default function App() {
         </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
+    </GlobalProvider>
   );
 }
 
