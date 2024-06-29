@@ -46,7 +46,7 @@ const ButtonTab = () => {
       ></Tab.Screen>
 
       <Tab.Screen
-        name="create"
+        name="Create"
         component={Create}
         options={{
           tabBarIcon: ({ focused }) => {
