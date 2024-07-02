@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, FlatList } from "react-native";
+import { View, Text, SafeAreaView, FlatList, RefreshControl } from "react-native";
 import React, {useState} from "react";
 import SearchInput from "../../components/SearchInput";
 import Trending from "../../components/Trending";
@@ -10,14 +10,15 @@ const Home = () => {
   const onRefresh = async () => {
     setRefresh(true)
     // recall video
+    setRefresh(false)
   }
  
   return (
     <SafeAreaView className="bg-primary h-full  ">
       <View className="p-1 mt-1">
         <FlatList
-          // data={[{ id: 1 }, { id: 2 }, { id: 3 }]}
-          data={[]}
+          data={[{ id: 1 }, { id: 2 }, { id: 3 }]}
+          // data={[]}
           keyExtractor={(item) => item.id.toLocaleString()}
           renderItem={({ item }) => (
             <Text className="text-2xl text-white ">{item.id}</Text>
@@ -43,6 +44,7 @@ const Home = () => {
             title='No Video Found'
             subtitle='No videos created yet on this topic'
             />}
+            refreshControl={<RefreshControl refreshing={refresh} onRefresh={onRefresh} />}
         />
       </View>
     </SafeAreaView>

@@ -49,7 +49,7 @@ const Signin = () => {
 
 
   return (
-    <SafeAreaView className="bg-primary h-full">
+    <SafeAreaView className="bg-black h-full">
       <ScrollView
         contentContainerStyle={{ justifyContent: "center" }}
         className="w-full   px-4 my-6  min-h-[85vh]"

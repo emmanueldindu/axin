@@ -29,7 +29,7 @@ const Layout = () => {
     if (!isLoading && isLoggedIn) {
       console.log('Navigating to ButtonTab');
       navigation.navigate('ButtonTab');
-    }
+    } 
   }, [isLoading, isLoggedIn, navigation]);
 
 
