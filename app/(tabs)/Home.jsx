@@ -29,6 +29,8 @@ const Home = () => {
     };
     fetchData();
   }, []);
+
+  const refetch = () => fetchData()
   // return { data };
 
   console.log(data)
@@ -38,6 +40,8 @@ const Home = () => {
   const onRefresh = async () => {
     setRefresh(true)
     // recall video
+
+    await refetch()
     setRefresh(false)
 
   }
@@ -46,11 +50,11 @@ const Home = () => {
     <SafeAreaView className="bg-primary h-full  ">
       <View className="p-1 mt-1">
         <FlatList
-          data={[{ id: 1 }, { id: 2 }, { id: 3 }]}
+          data={data}
           // data={[]}
-          keyExtractor={(item) => item.id.toLocaleString()}
+          keyExtractor={(item) => item.$id}
           renderItem={({ item }) => (
-            <Text className="text-2xl text-white ">{item.id}</Text>
+            <Text className="text-2xl text-white ">{item.title}</Text>
           )}
           ListHeaderComponent={() => (
             <View className="my-6 px-4  space-y-6">
