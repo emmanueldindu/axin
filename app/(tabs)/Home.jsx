@@ -1,18 +1,47 @@
-import { View, Text, SafeAreaView, FlatList, RefreshControl } from "react-native";
-import React, {useState} from "react";
+import { View, Text, SafeAreaView, FlatList, RefreshControl, Alert } from "react-native";
+import React, {useState, useEffect} from "react";
 import SearchInput from "../../components/SearchInput";
 import Trending from "../../components/Trending";
 import EmptyState from "../../components/EmptyState";
+import { getAllPost } from "../../lib/appwrite";
+// import useAppwrite from "../../lib/useAppwrite";
 
 const Home = () => {
+  const [data, setData] = useState([]);
+  const [loading, setIsLoading] = useState(true);
+
   const [refresh, setRefresh] = useState(false)
+  
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+
+      try {
+        const response = await getAllPost();
+        setData(response);
+      } catch (error) {
+        Alert.alert(error.message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
+  // return { data };
+
+  console.log(data)
+
+
 
   const onRefresh = async () => {
     setRefresh(true)
     // recall video
     setRefresh(false)
+
   }
- 
+
   return (
     <SafeAreaView className="bg-primary h-full  ">
       <View className="p-1 mt-1">
