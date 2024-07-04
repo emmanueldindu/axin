@@ -1,50 +1,53 @@
-import { View, Text, SafeAreaView, FlatList, RefreshControl, Alert } from "react-native";
-import React, {useState, useEffect} from "react";
+import {
+  View,
+  Text,
+  SafeAreaView,
+  FlatList,
+  RefreshControl,
+  Alert,
+} from "react-native";
+import React, { useState, useEffect } from "react";
 import SearchInput from "../../components/SearchInput";
 import Trending from "../../components/Trending";
 import EmptyState from "../../components/EmptyState";
 import { getAllPost } from "../../lib/appwrite";
+import VideoCard from "../../components/VideoCard";
 // import useAppwrite from "../../lib/useAppwrite";
 
 const Home = () => {
   const [data, setData] = useState([]);
   const [loading, setIsLoading] = useState(true);
 
-  const [refresh, setRefresh] = useState(false)
-  
+  const [refresh, setRefresh] = useState(false);
 
+  const fetchData = async () => {
+    setIsLoading(true);
 
+    try {
+      const response = await getAllPost();
+      setData(response);
+    } catch (error) {
+      Alert.alert(error.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-
-      try {
-        const response = await getAllPost();
-        setData(response);
-      } catch (error) {
-        Alert.alert(error.message);
-      } finally {
-        setIsLoading(false);
-      }
-    };
     fetchData();
   }, []);
 
-  const refetch = () => fetchData()
+  const refetch = () => fetchData();
   // return { data };
 
-  console.log(data)
-
-
+  console.log(data);
 
   const onRefresh = async () => {
-    setRefresh(true)
+    setRefresh(true);
     // recall video
 
-    await refetch()
-    setRefresh(false)
-
-  }
+    await refetch();
+    setRefresh(false);
+  };
 
   return (
     <SafeAreaView className="bg-primary h-full  ">
@@ -53,9 +56,7 @@ const Home = () => {
           data={data}
           // data={[]}
           keyExtractor={(item) => item.$id}
-          renderItem={({ item }) => (
-            <Text className="text-2xl text-white ">{item.title}</Text>
-          )}
+          renderItem={({ item }) => <VideoCard video={item} />}
           ListHeaderComponent={() => (
             <View className="my-6 px-4  space-y-6">
               <View className="justify-between items-start flex-row mb-6">
@@ -73,11 +74,15 @@ const Home = () => {
               </View>
             </View>
           )}
-          ListEmptyComponent={() => <EmptyState
-            title='No Video Found'
-            subtitle='No videos created yet on this topic'
-            />}
-            refreshControl={<RefreshControl refreshing={refresh} onRefresh={onRefresh} />}
+          ListEmptyComponent={() => (
+            <EmptyState
+              title="No Video Found"
+              subtitle="No videos created yet on this topic"
+            />
+          )}
+          refreshControl={
+            <RefreshControl refreshing={refresh} onRefresh={onRefresh} />
+          }
         />
       </View>
     </SafeAreaView>
