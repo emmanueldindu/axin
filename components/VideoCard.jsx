@@ -1,5 +1,6 @@
 import { View, Text, Image } from "react-native";
-import React from "react";
+import React, { useState } from "react";
+import icons from "../constants/icons";
 
 const VideoCard = ({
   video: {
@@ -9,6 +10,8 @@ const VideoCard = ({
     creator: { username, avatar },
   },
 }) => {
+
+    const [play, setPlay] = useState(false)
   return (
     <View className="flex-col items-center px-4 mb-14">
       <View className="flex-row gap-3 item-start">
@@ -20,14 +23,31 @@ const VideoCard = ({
               resizeMode="cover"
             />
           </View>
-
+          <View className="justify-center flex-1 ml-3">
+            <Text className="text-white font-semibold" numberOfLines={1}>
+              {title}
+            </Text>
+            <Text
+              className="text-xs text-gray-200 mt-1 font-[500] "
+              numberOfLines={1}
+            >
+              {username}
+            </Text>
+          </View>
 
           <View>
-            
+            <View className="pb-2">
+              <Image
+                source={icons.menu}
+                className="h-5 w-5"
+                resizeMode="contain"
+              />
+            </View>
           </View>
+
+
         </View>
       </View>
-      <Text className="text-2xl text-white ">{title}</Text>
     </View>
   );
 };
