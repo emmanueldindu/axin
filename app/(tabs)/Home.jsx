@@ -10,12 +10,15 @@ import React, { useState, useEffect } from "react";
 import SearchInput from "../../components/SearchInput";
 import Trending from "../../components/Trending";
 import EmptyState from "../../components/EmptyState";
-import { getAllPost } from "../../lib/appwrite";
+import { getAllPost, getLatestPost } from "../../lib/appwrite";
 import VideoCard from "../../components/VideoCard";
 // import useAppwrite from "../../lib/useAppwrite";
 
 const Home = () => {
   const [data, setData] = useState([]);
+  const [post, setPost] = useState([]
+
+  )
   const [loading, setIsLoading] = useState(true);
 
   const [refresh, setRefresh] = useState(false);
@@ -34,7 +37,24 @@ const Home = () => {
   };
   useEffect(() => {
     fetchData();
+    fetchPost()
   }, []);
+
+
+  const fetchPost = async () => {
+    setIsLoading(true);
+
+    try {
+      const response = await getLatestPost()
+      setPost(response)
+    } catch (error) {
+      Alert.alert(error.message);
+    }finally {
+      setIsLoading(false)
+    }
+  }
+
+
 
   const refetch = () => fetchData();
   // return { data };
@@ -70,7 +90,7 @@ const Home = () => {
               <SearchInput />
               <View className="w-full flex-1 pt-5 pb-8">
                 <Text className="text-gray-100">Latest Videos</Text>
-                <Trending post={[{ id: 1 }, { id: 2 }, { id: 3 }] ?? []} />
+                <Trending post={post ?? []} />
               </View>
             </View>
           )}

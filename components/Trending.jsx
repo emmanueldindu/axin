@@ -4,9 +4,10 @@ import React from 'react'
 const Trending = ({posts}) => {
   return (
     <FlatList 
-    data={[{ id: 1 }, { id: 2 }, { id: 3 }] ?? []}
+    data={posts
+    }
     keyExtractor={(item) => item.id}
-    renderItem={({item}) => <Text className='text-white text-2xl'>{item.id}</Text>}
+    renderItem={({item}) => <Text className='text-white text-2xl'>{item.title }</Text>}
     horizontal
 
     />
