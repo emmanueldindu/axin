@@ -16,9 +16,7 @@ import VideoCard from "../../components/VideoCard";
 
 const Home = () => {
   const [data, setData] = useState([]);
-  const [post, setPost] = useState([]
-
-  )
+  const [latestPost, setLatestPost] = useState([])
   const [loading, setIsLoading] = useState(true);
 
   const [refresh, setRefresh] = useState(false);
@@ -46,7 +44,7 @@ const Home = () => {
 
     try {
       const response = await getLatestPost()
-      setPost(response)
+      setLatestPost(response)
     } catch (error) {
       Alert.alert(error.message);
     }finally {
@@ -59,7 +57,7 @@ const Home = () => {
   const refetch = () => fetchData();
   // return { data };
 
-  console.log(data);
+  console.log(latestPost);
 
   const onRefresh = async () => {
     setRefresh(true);
@@ -90,7 +88,7 @@ const Home = () => {
               <SearchInput />
               <View className="w-full flex-1 pt-5 pb-8">
                 <Text className="text-gray-100">Latest Videos</Text>
-                <Trending post={post ?? []} />
+                <Trending posts={latestPost ?? []} />
               </View>
             </View>
           )}
