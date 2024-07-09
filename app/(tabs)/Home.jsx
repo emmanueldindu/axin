@@ -57,7 +57,7 @@ const Home = () => {
   const refetch = () => fetchData();
   // return { data };
 
-  console.log(latestPost);
+
 
   const onRefresh = async () => {
     setRefresh(true);
@@ -87,7 +87,7 @@ const Home = () => {
               </View>
               <SearchInput />
               <View className="w-full flex-1 pt-5 pb-8">
-                <Text className="text-gray-100">Latest Videos</Text>
+                <Text className="text-gray-100 text-base mb-3">Latest Videos</Text>
                 <Trending posts={latestPost ?? []} />
               </View>
             </View>
