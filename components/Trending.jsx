@@ -42,11 +42,14 @@ const TrendingItem = ({ activeItem, item }) => {
     >
       {play ? (
         <Video
-          source={{ uri: item.video }}
-          className="w-52 h-52 bg-white mt-4 "
-          // resizeMode={ResizeMode.CONTAIN}
-          // useNativeControls
-          // shouldPlay
+          source={{ 
+            uri: 'https://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4',
+
+           }}
+          className="w-52 h-[250px] bg-red-200 my-auto  mt-4 "
+          resizeMode={ResizeMode.CONTAIN}
+          useNativeControls
+          shouldPlay
         />
       ) : (
         <TouchableOpacity
